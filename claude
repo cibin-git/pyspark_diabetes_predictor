@@ -1,0 +1,50 @@
+Anthropic developed Claude as a safety-focused, general-purpose AI assistant.
+
+What Claude is designed to do
+	1.	Conversational AI
+	•	Natural dialogue
+	•	Answering questions
+	•	Explaining complex topics clearly
+	2.	Content Creation
+	•	Writing articles, blogs, emails
+	•	Summarizing long documents
+	•	Brainstorming ideas
+	•	Editing and improving text
+	3.	Coding & Technical Help
+	•	Generating code
+	•	Explaining code
+	•	Debugging
+	•	Architecture suggestions
+	4.	Document Analysis
+	•	Reading long PDFs
+	•	Extracting insights
+	•	Comparing contracts
+	•	Summarizing reports
+	5.	Enterprise Use
+	•	Knowledge assistants
+	•	Workflow automation
+	•	Customer support systems
+	•	Internal documentation analysis
+
+⸻
+
+What makes Claude different?
+
+Anthropic designed Claude around AI safety and alignment using a method called “Constitutional AI.”
+
+Instead of only training from human feedback, Claude is trained using a structured set of principles (a “constitution”) to:
+	•	Reduce harmful outputs
+	•	Avoid unsafe instructions
+	•	Be more transparent and reliable
+	•	Provide balanced answers
+
+⸻
+
+In simple terms
+
+Claude is designed to be:
+	•	Helpful
+	•	Harmless
+	•	Honest
+
+If you’re exploring building your own LM agent locally (like you asked earlier), I can also explain how Claude differs architecturally from models like OpenAI’s GPT models or open-source LLMs.
