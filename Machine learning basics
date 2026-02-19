@@ -1,0 +1,81 @@
+• What ML is
+
+• Machine learning (ML) is the practice of training algorithms to make predictions or decisions from data without explicit rules; models learn patterns from examples.
+
+• Main paradigms
+
+• Supervised learning: train on labeled input→output pairs (classification, regression).
+
+• Unsupervised learning: find structure in unlabeled data (clustering, dimensionality reduction).
+
+• Semi-supervised learning: mix of labeled and unlabeled data.
+
+• Reinforcement learning: agents learn by interacting with an environment to maximize cumulative reward.
+
+• Typical ML workflow
+
+• Problem definition → collect/inspect data → clean & preprocess → feature engineering → split data (train/validation/test) → choose/model architecture → train → evaluate → tune hyperparameters → deploy → monitor & iterate.
+
+• Common algorithms & families
+
+• Linear models: Linear Regression, Logistic Regression.
+
+• Tree-based: Decision Trees, Random Forests, Gradient Boosting (XGBoost, LightGBM).
+
+• Kernel methods: SVMs.
+
+• Neural networks: MLPs, CNNs (vision), RNNs/Transformers (sequence & NLP).
+
+• Clustering: K-Means, DBSCAN.
+
+• Dimensionality reduction: PCA, t-SNE, UMAP.
+
+• Important concepts
+
+• Overfitting vs underfitting; bias–variance tradeoff.
+
+• Regularization: L1/L2, dropout, early stopping.
+
+• Cross-validation for robust model selection.
+
+• Feature scaling, encoding categorical variables, handling missing values.
+
+• Class imbalance strategies: resampling, class weights, evaluation metrics.
+
+• Evaluation metrics (examples)
+
+• Classification: accuracy, precision, recall, F1, ROC-AUC, confusion matrix.
+
+• Regression: MSE, RMSE, MAE, R².
+
+• Use metrics aligned with business objective.
+
+• Model selection & tuning
+
+• Grid/random search, Bayesian optimization (Optuna), learning curves, validation sets.
+
+• Use simpler models as baselines.
+
+• Production & deployment concerns
+
+• Model latency, throughput, monitoring, drift detection, retraining strategies.
+
+• Feature pipelines, data versioning, model versioning (MLflow, DVC).
+
+• Security, privacy, and compliance (data handling, fairness).
+
+• Practical tools & libraries
+
+• Python ecosystem: scikit-learn, pandas, NumPy, PyTorch, TensorFlow, Hugging Face.
+
+• Data & orchestration: Spark/PySpark, Airflow, Kubeflow, Ray.
+
+• Experiment tracking: MLflow, Weights & Biases.
+
+• Quick minimal example (scikit-learn)
+
+• Load data → train test split → fit model → evaluate on test set (scikit-learn fits this pattern).
+
+
+
+
