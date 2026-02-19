@@ -1,0 +1,237 @@
+🚀 1. Large Language Models (LLMs) & Foundations
+
+These are essential — both conceptually and in practical implementation:
+
+🔹 GPT-style Models
+	•	OpenAI GPT family (ChatGPT, GPT-4.5/5, etc.)
+	•	Claude (Anthropic)
+	•	Gemini (Google)
+prompt engineering, fine-tuning, inference optimization.
+
+🔹 Open-Source LLMs
+	•	LLaMA (Meta)
+	•	Falcon
+	•	Mistral
+	•	OpenAssistant
+
+Training, evaluation, scaling, responsible deployment.
+
+🔹 Text-to-Code Models
+	•	Codex
+	•	Code LLaMA / Code-GPT
+
+Useful in tooling and AI-assisted development.
+
+⸻
+
+🛠 2. Development Frameworks & Libraries
+
+These are frameworks you will see in job descriptions and interviews:
+
+🔹 PyTorch
+	•	The industry-standard for research and production deep learning
+	•	Used in almost all model development pipelines
+Interview topics: GPU training, autograd, performance optimization
+
+🔹 TensorFlow / Keras
+	•	Still widely used especially in production and TensorFlow Serving
+Interview topics: graph execution, deployment
+
+🔹 JAX
+	•	Popular for high-performance mathematical computing and model research
+Interview topics: differentiable programming, XLA
+
+🔹 Hugging Face (Transformers + Datasets)
+	•	De facto standard for working with LLMs & transformers
+Interview topics: tokenizers, attention, fine-tuning
+
+⸻
+
+💡 3. Model Fine-Tuning & Optimization Tools
+
+Understanding model adaptation is very common in interviews:
+
+🔹 LoRA (Low-Rank Adaptation)
+	•	Efficient fine-tuning strategy
+	•	Interview topic: parameter-efficient training
+
+🔹 PEFT (Parameter-Efficient Fine-Tuning)
+	•	Framework built on Hugging Face for efficient fine-tuning
+
+🔹 Quantization & Distillation
+	•	BitsAndBytes
+	•	GPTQ
+	•	DistilBERT
+
+Interview topics: model compression, memory vs performance.
+
+⸻
+
+📡 4. Deployment & Serving
+
+In production ML systems, deployment tools are hugely important:
+
+🔹 TensorFlow Serving
+	•	Production-grade server for TF models
+
+🔹 TorchServe
+	•	Model serving for PyTorch models
+
+🔹 BentoML
+	•	Framework for production model APIs
+
+🔹 Ray
+	•	Distributed compute for training & serving
+
+🔹 KServe (Kubernetes)
+	•	Cloud-native inference
+
+Interview angle: scalability, load balancing, latency, monitoring
+
+⸻
+
+🌐 5. End-to-End ML Systems & production-ready ML workflows:
+
+🔹 MLflow
+	•	Experiment tracking + deployment workflows
+
+🔹 Kubeflow
+	•	Kubernetes ML orchestration
+
+🔹 Weights & Biases
+	•	Logging, experiment tracking
+
+Interview topics: versioning, pipeline automation, reproducibility
+
+⸻
+
+🔍 6. Data & Feature Engineering Tools
+
+Good knowledge here demonstrates practical readiness:
+
+🔹 Pandas
+	•	Still foundational
+
+🔹 Apache Spark / PySpark
+	•	Big data workflows
+
+🔹 Polars
+	•	Faster alternative to Pandas
+
+Interview topics: ETL, performance, handling large datasets
+
+⸻
+
+📊 7. Visualization & Monitoring
+
+Often used in debugging and model interpretability:
+
+🔹 TensorBoard
+	•	Training visuals
+
+🔹 Plotly / Seaborn
+	•	Charts & plots
+
+🔹 SHAP / LIME
+	•	Model interpretability
+
+⸻
+
+🤖 8. AutoML and No-Code/Low-Code Tools
+
+Interviewers sometimes explore if you understand automation:
+
+🔹 AutoKeras
+
+🔹 H2O.ai
+
+🔹 Google AutoML / VertexAI
+
+⸻
+
+🧠 9. Conceptual Topics Every Interviewer Loves
+
+These aren’t tools but core ML/LLM concepts that are often asked:
+
+✔ Model training vs inference
+✔ Overfitting vs underfitting
+✔ Loss functions & optimization
+✔ Attention & Transformers
+✔ Embeddings & vector search
+✔ Prompt engineering
+✔ Evaluation metrics (BLEU, accuracy, F1, perplexity)
+✔ Scaling & distributed training
+✔ Memory & compute optimization
+
+⸻
+
+🌎 10. Vector Databases & Retrieval
+
+With LLM apps, retrieval → generation is a major pattern:
+
+🔹 Pinecone
+
+🔹 Qdrant
+
+🔹 Milvus
+
+🔹 Weaviate
+
+🔹 Chroma DB
+
+Interview topics: similarity search, indexing, embeddings
+
+⸻
+
+🗂 11. Cloud Platforms & APIs
+
+Often part of real-world roles:
+
+🔹 AWS SageMaker
+🔹 GCP Vertex AI
+🔹 Azure ML
+🔹 Hugging Face Hub / Inference API
+
+⸻
+
+✨ 12. Emergent Tools Worth Exploring
+
+These are currently generating buzz:
+
+Category	Examples
+Local LLM runtimes	LocalAI, Ollama, Mistral Local
+Agent Frameworks	LangChain, LlamaIndex, AutoGen
+Prompt Engineering Libraries	Promptify, PromptGen
+Simulation & RL	Gymnasium, Stable Baselines3
+Knowledge Graph + LLM	Neo4j + embeddings
+
+
+⸻
+
+📌 What To Focus On For Interviews
+
+🧠 Core Skills
+
+✔ Python proficiency
+✔ Deep Learning fundamentals
+✔ Probability & statistics
+✔ Data structures & algorithms
+✔ System design basics
+
+🛠 Tools to Know
+	1.	PyTorch / TensorFlow
+	2.	Hugging Face Transformers
+	3.	MLflow / Weights & Biases
+	4.	Ray / Distributed training
+	5.	Vector DBs (Pinecone / Qdrant)
+
+⸻
+
+🧭 Tips to Prepare Effectively
+
+🔹 Build small end-to-end projects (data → model → deployment)
+🔹 Learn to tune and optimize models
+🔹 Understand tradeoffs in production systems
+🔹 Practice whiteboard systems questions
+
+⸻
