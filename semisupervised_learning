@@ -1,0 +1,159 @@
+What it is
+
+• Semi‑supervised learning (SSL) leverages a small labeled dataset plus a larger unlabeled dataset to improve model performance versus using labeled data alone. The goal is to exploit structure in unlabeled data to learn better representations or pseudo‑labels.
+
+When to use it
+
+• Labeling is expensive/time-consuming but unlabeled data is abundant.
+
+• You have a small labeled set (e.g., <10% of data) and want higher accuracy than fully supervised training on the labeled subset.
+
+• Typical in medical imaging, document classification, speech, and many industrial settings.
+
+Typical workflow
+
+1. Problem & data framing: collect labeled set L and unlabeled set U. Decide metric and success criteria.
+
+2. Preprocessing: same preprocessing applied to L and U (scaling, encoding).
+
+3. Base supervised model: train baseline model on L and evaluate on held-out labeled validation set.
+
+4. Choose SSL strategy (pseudo‑labeling / consistency / graph‑based / generative).
+
+5. Generate/use unlabeled information (pseudo‑labels, graph affinities, consistency losses).
+
+6. Retrain or fine‑tune model using L + pseudo‑labeled U (or joint loss).
+
+7. Validate on held‑out labeled set; iterate (adjust thresholds, augmentations).
+
+8. Deploy & monitor (watch for drift and pseudo‑label noise).
+
+Common approaches / algorithms
+
+• Pseudo‑labeling (self‑training): model predicts labels on U, add high‑confidence predictions to L, retrain. Simple and effective when confidence is calibrated.
+
+• Self‑training wrappers: e.g., sklearn SelfTrainingClassifier.
+
+• Consistency regularization: enforce consistent model outputs under input augmentations or noise (e.g., Mean Teacher, FixMatch, MixMatch).
+
+• Graph‑based label propagation: LabelPropagation, LabelSpreading (scikit‑learn) — propagate labels across a graph built from feature similarities.
+
+• Generative approaches: semi‑supervised VAEs, GANs (e.g., CatGAN).
+
+• Hybrid methods: combine pseudo‑labeling, strong augmentations, and confidence thresholding (FixMatch style).
+
+Evaluation & validation
+
+• Always keep a labeled validation/test set untouched for honest evaluation.
+
+• Use nested validation or repeated experiments to assess stability.
+
+• Be cautious: internal metrics on pseudo‑labeled data are biased — evaluate only on true labels.
+
+• Monitor performance of pseudo‑labels (precision of pseudo-labeled class assignments).
+
+Practical tips & best practices
+
+• Use a small, high‑quality validation set not used for SSL steps.
+
+• Use confidence thresholds (e.g., only accept pseudo‑labels where model probability > 0.9).
+
+• Class balance: be careful that pseudo‑labeling doesn’t amplify majority classes; use class‑conditional thresholds or sampling.
+
+• Data augmentation + consistency regularization often yields large gains (FixMatch uses strong vs weak augmentations).
+
+• Temperature/entropy calibration and probability calibration can help choose thresholds.
+
+• Iterative self‑training works: add pseudo‑labels in rounds, retrain, re‑label.
+
+• When using graph methods, scale can be an issue (graphs on millions of points are expensive).
+
+• For deep SSL, strong augmentations and large unlabeled corpora are key.
+
+• Always inspect pseudo‑labels and error modes with qualitative analyses.
+
+Minimal Python examples
+
+1. Label spreading (graph-based) — scikit‑learnfrom sklearn.semi_supervised import LabelSpreadingfrom sklearn.preprocessing import StandardScalerfrom sklearn.datasets import make_blobsimport numpy as np
+
+X, y_true = make_blobs(n_samples=300, centers=3, cluster_std=1.0, random_state=42)rng = np.random.RandomState(42)
+
+mask out labels for most points
+
+n_labeled = 30labels = -np.ones(len(y_true), dtype=int)labeled_idx = rng.choice(len(y_true), n_labeled, replace=False)labels[labeled_idx] = y_true[labeled_idx]
+
+scaler = StandardScaler()Xs = scaler.fit_transform(X)
+
+lp = LabelSpreading(kernel=‘rbf’, alpha=0.8)lp.fit(Xs, labels)preds = lp.transduction_  # predicted labels for all samples
+
+2. Self‑training (pseudo‑labeling) with sklearn wrapperfrom sklearn.semi_supervised import SelfTrainingClassifierfrom sklearn.linear_model import LogisticRegressionfrom sklearn.model_selection import train_test_splitfrom sklearn.metrics import classification_report
+
+Assume X, y_true from above
+
+X_train, X_test, y_train, y_test = train_test_split(Xs, y_true, test_size=0.3, random_state=42)
+
+Mask most training labels (simulate few labeled)
+
+rng = np.random.RandomState(1)n_labeled = 20y_train_masked = -np.ones_like(y_train)labeled_idx = rng.choice(len(y_train), n_labeled, replace=False)y_train_masked[labeled_idx] = y_train[labeled_idx]
+
+base_clf = LogisticRegression(max_iter=1000)self_tr = SelfTrainingClassifier(base_clf, threshold=0.8)  # only accept pseudo-labels with prob >= 0.8self_tr.fit(X_train, y_train_masked)print(classification_report(y_test, self_tr.predict(X_test)))
+
+Notes:
+
+• SelfTrainingClassifier uses base_estimator.predict_proba to choose high‑confidence examples by threshold (or uses some other criterion).
+
+3. Simple manual pseudo‑labeling loop (sketch)from sklearn.ensemble import RandomForestClassifierclf = RandomForestClassifier()
+
+1. Train on labeled subset L
+
+clf.fit(X_labeled, y_labeled)
+
+2. Predict probabilities on unlabeled U
+
+probs = clf.predict_proba(X_unlabeled)conf_mask = probs.max(axis=1) > 0.9pseudo_labels = probs.argmax(axis=1)
+
+3. Add confident pseudo-labeled samples to L and retrain
+
+X_aug = np.concatenate([X_labeled, X_unlabeled[conf_mask]])y_aug = np.concatenate([y_labeled, pseudo_labels[conf_mask]])clf.fit(X_aug, y_aug)
+
+Deep learning / state‑of‑the‑art pointers (brief)
+
+• MixMatch, FixMatch, Mean Teacher, Virtual Adversarial Training (VAT) — use consistency + augmentation + pseudo-labeling ideas.
+
+• FixMatch high-level: generate weak augmentations → get pseudo‑labels for examples with high-confidence → enforce consistency with strong augmentations using pseudo-labels as targets.
+
+• There are open‑source implementations in PyTorch (e.g., official FixMatch repos, lightning-bolts).
+
+Common pitfalls
+
+• Confirmation bias: model’s early mistakes become reinforced via pseudo‑labels. Mitigate by high thresholds, ensembling, or human review.
+
+• Data leakage: make sure unlabeled data used for SSL is from same distribution and not containing test info.
+
+• Poor calibration: probability thresholds depend on calibration; use temperature scaling or calibration.
+
+• Imbalanced classes: pseudo‑labeling may drown small classes; apply class-aware sampling or thresholds.
+
+Useful datasets & benchmarks
+
+• Semi‑supervised MNIST/CIFAR (standard SSL benchmarks).
+
+• UCI datasets can be adapted by removing labels.
+
+• Domain‑specific corpora for NLP (use unlabeled text + small labeled dataset).
+
+Libraries & tools
+
+• scikit‑learn: sklearn.semi_supervised (LabelPropagation, LabelSpreading, SelfTrainingClassifier).
+
+• imbalanced‑learn and standard sklearn tools for preprocessing and pipelines.
+
+• PyTorch / TensorFlow: many community SSL implementations (FixMatch, Mean Teacher).
+
+• Hugging Face: checkpoints and examples for semi‑supervised fine‑tuning in some contexts.
+
+When to avoid SSL
+
+• If unlabeled data is from a different distribution (covariate shift) — pseudo‑labels will harm performance.
+
+• If you have enough labeled data already — supervised learning may be simpler and safer.
