@@ -1,0 +1,184 @@
+
+
+These are foundational models in ML and still heavily used in production systems.
+
+⸻
+
+1️⃣ Linear Regression
+
+📌 What It Does
+
+Predicts a continuous value.
+
+Examples:
+	•	House price prediction
+	•	Sales forecasting
+	•	Temperature prediction
+
+⸻
+
+🧮 Model Equation
+
+y = w_0 + w_1x_1 + w_2x_2 + ... + w_nx_n
+
+Or in vector form:
+
+y = w^T x + b
+
+Where:
+	•	x = features
+	•	w = weights
+	•	b = bias
+	•	y = predicted value
+
+⸻
+
+🎯 Objective
+
+Minimize Mean Squared Error (MSE):
+
+MSE = \frac{1}{n} \sum (y_{true} - y_{pred})^2
+
+⸻
+
+🐍 Simple Python Example
+
+from sklearn.linear_model import LinearRegression
+import numpy as np
+
+# Sample data
+X = np.array([[1], [2], [3], [4]])
+y = np.array([2, 4, 6, 8])
+
+model = LinearRegression()
+model.fit(X, y)
+
+print("Weight:", model.coef_)
+print("Bias:", model.intercept_)
+print("Prediction for 5:", model.predict([[5]]))
+
+This learns:
+y = 2x
+
+⸻
+
+📊 When to Use
+
+✔ Continuous output
+✔ Relationship roughly linear
+✔ Interpretability required
+
+⸻
+
+2️⃣ Logistic Regression
+
+Despite the name, this is used for classification, not regression.
+
+⸻
+
+📌 What It Does
+
+Predicts probability of class membership.
+
+Examples:
+	•	Spam vs Not Spam
+	•	Loan Default vs No Default
+	•	Fraud vs Genuine
+
+⸻
+
+🧮 Model Idea
+
+First compute linear output:
+
+z = w^T x + b
+
+Then apply Sigmoid function:
+
+\sigma(z) = \frac{1}{1 + e^{-z}}
+
+This converts output into probability (0 to 1).
+
+⸻
+
+🎯 Objective
+
+Minimize Log Loss (Cross Entropy):
+
+Loss = -[y \log(p) + (1-y)\log(1-p)]
+
+⸻
+
+🐍 Simple Python Example
+
+from sklearn.linear_model import LogisticRegression
+import numpy as np
+
+# Sample data
+X = np.array([[0], [1], [2], [3]])
+y = np.array([0, 0, 1, 1])
+
+model = LogisticRegression()
+model.fit(X, y)
+
+print("Prediction probability for 1.5:",
+      model.predict_proba([[1.5]]))
+
+
+⸻
+
+📊 Key Differences
+
+Linear Regression	Logistic Regression
+Predicts continuous value	Predicts probability
+Uses MSE loss	Uses Log loss
+Output: (-∞, +∞)	Output: (0,1)
+For regression tasks	For classification
+
+
+⸻
+
+🔍 Geometric Interpretation
+
+Both models:
+	•	Create a linear decision boundary
+	•	In 2D → straight line
+	•	In 3D → plane
+
+Logistic regression separates classes using a hyperplane.
+
+⸻
+
+🧠 Why Linear Models Still Matter
+
+Even in deep learning era:
+
+✔ Fast training
+✔ Highly interpretable
+✔ Works well on tabular data
+✔ Strong baseline model
+
+For example:
+	•	Credit scoring systems
+	•	Risk modeling
+	•	Healthcare prediction systems
+
+Many banking systems still rely on logistic regression because it’s explainable.
+
+⸻
+
+⚡ Advanced Concepts (Optional)
+	•	L1 Regularization → Lasso
+	•	L2 Regularization → Ridge
+	•	Elastic Net → Combination
+	•	Multiclass logistic regression (Softmax)
+
+⸻
+
+
+	•	Linear vs Polynomial regression
+	•	Regularization deeply
+	•	Gradient Descent math intuition
+	•	Logistic regression decision boundary visualization
+	•	How linear models connect to neural networks
+
